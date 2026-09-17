@@ -4,8 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>34adfc29-e18c-46f1-9f9d-3062477118c6</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>
-    </StartupFile>
+    <StartupFile>app.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app.py" />
     <Compile Include="env\Lib\site-packages\pip\_internal\build_env.py" />
     <Compile Include="env\Lib\site-packages\pip\_internal\cache.py" />
     <Compile Include="env\Lib\site-packages\pip\_internal\cli\autocompletion.py" />
@@ -862,6 +862,7 @@
     <Folder Include="templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore" />
     <Content Include="env\Lib\site-packages\distutils-precedence.pth" />
     <Content Include="env\Lib\site-packages\pip-22.0.4.dist-info\entry_points.txt" />
     <Content Include="env\Lib\site-packages\pip-22.0.4.dist-info\INSTALLER" />
@@ -1569,7 +1570,8 @@
     <Content Include="templates\detail.html" />
     <Content Include="templates\loading.html" />
     <Content Include="templates\results.html" />
-    <Content Include="templates\style_select.html" />
+    <Content Include="templates\select.html" />
+    <Content Include="templates\style.html" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in

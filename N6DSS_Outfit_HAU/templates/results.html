@@ -1,67 +1,64 @@
 {% extends 'base.html' %}
 
-{% block title %}OutfitAI - Outfit phù hợp{% endblock %}
+{% block title %}OutfitAI - Gợi ý Top 3 trang phục{% endblock %}
 
 {% block content %}
 <div class="page-container">
     <div class="stepper-bar">
-        <span class="step-item done">✓ Sở thích</span>
-        <span class="step-line active"></span>
         <span class="step-item done">✓ Hoạt động</span>
         <span class="step-line active"></span>
-        <span class="step-item done">✓ Thời tiết</span>
+        <span class="step-item done">✓ Phong cách</span>
         <span class="step-line active"></span>
-        <span class="step-item active">4 Kết quả</span>
+        <span class="step-item active">3 Kết quả Top-3</span>
     </div>
 
     <div class="results-header">
-        <h1 class="main-title">Outfit phù hợp với bạn</h1>
-        <p class="sub-title">AI đã tìm thấy 3 lựa chọn phù hợp nhất với yêu cầu hôm nay.</p>
+        <h1 class="main-title">Top 3 Outfit phù hợp nhất</h1>
+        <p class="sub-title">Hệ thống DSS đã xếp hạng các phương án tối ưu nhất dựa trên tiêu chí của bạn.</p>
 
         <div class="filter-row">
-            <button class="filter-tab active">Phù hợp nhất</button>
-            <button class="filter-tab">Thoải mái</button>
-            <button class="filter-tab">Phong cách</button>
-            <button class="filter-tab">Thời tiết</button>
-            <span class="live-weather">🟢 Cập nhật theo thời tiết hôm nay · 26°C, có mây</span>
+            <button class="filter-tab active">Tất cả Top 3</button>
+            <button class="filter-tab">Ấm áp nhất</button>
+            <button class="filter-tab">Thoải mái làm đồ án</button>
+            <span class="live-weather">🟢 Cập nhật thời tiết Hà Nội · 18°C, Mùa Thu Đông</span>
         </div>
     </div>
 
-    <!-- CARDS GRID 3 OUTFIT -->
-    <div class="grid-3-cols outfit-results-grid">
+    <!-- LƯỚI 3 OUTFIT -->
+    <div class="grid-3-cols">
         {% for outfit in outfits %}
         <div class="card outfit-result-card">
             <div class="outfit-image-box">
-                <span class="ai-tag">AI ĐỀ XUẤT</span>
-                <span class="number-circle">{{ loop.index }}</span>
+                <span class="ai-tag">✦ DSS TOP {{ loop.index }}</span>
+                <span class="number-circle">#{{ loop.index }}</span>
             </div>
 
             <div class="outfit-details">
-                <h3>{{ outfit.name }}</h3>
-                <p class="items-text">{{ outfit.items }}</p>
+                <h3 style="font-size: 15px; font-weight: 700; margin-bottom: 4px;">{{ outfit.name }}</h3>
+                <p style="font-size: 11px; color: #64748B; margin-bottom: 10px; min-height: 32px;">{{ outfit.items }}</p>
 
                 <div class="score-line">
                     <span class="score-percent">{{ outfit.match_score }}%</span>
-                    <span class="score-label">phù hợp</span>
+                    <span class="score-label">điểm phù hợp</span>
                 </div>
 
-                <p class="match-desc">{{ outfit.desc }}</p>
+                <p style="font-size: 11px; color: #475569; margin-bottom: 14px;">{{ outfit.desc }}</p>
 
-                <a href="{{ url_for('detail', outfit_id=outfit.id) }}" class="btn-view-detail">Xem chi tiết ›</a>
+                <a href="{{ url_for('detail', outfit_id=outfit.id) }}" class="btn-view-detail">Xem phân tích chi tiết ›</a>
             </div>
         </div>
         {% endfor %}
     </div>
 
-    <!-- BANNER DƯỚI -->
+    <!-- BANNER HÀNH ĐỘNG -->
     <div class="card banner-bottom">
         <div>
-            <b>Muốn thử phong cách khác?</b>
-            <p style="font-size: 12px; color: #64748B;">Điều chỉnh tiêu chí và để AI tạo thêm gợi ý cho bạn.</p>
+            <b style="font-size: 13px;">Chưa tìm thấy outfit ưng ý?</b>
+            <p style="font-size: 12px; color: #64748B;">Bạn có thể thay đổi trọng số tiêu chí hoặc chọn ngữ cảnh khác.</p>
         </div>
-        <div class="banner-actions">
-            <a href="{{ url_for('style_select') }}" class="btn-outline-pill">Xem thêm gợi ý</a>
-            <button class="btn-dark-pill" onclick="alert('Đã lưu lựa chọn thành công!')">Lưu lựa chọn →</button>
+        <div style="display: flex; gap: 10px;">
+            <a href="{{ url_for('style_select') }}" class="btn-outline-pill">Chỉnh sửa tiêu chí</a>
+            <button class="btn-dark-pill" onclick="alert('Đã lưu lựa chọn thành công vào lịch sử!')">Lưu outfit đã chọn →</button>
         </div>
     </div>
 </div>

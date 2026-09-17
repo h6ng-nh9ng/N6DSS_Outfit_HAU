@@ -1,31 +1,27 @@
 {% extends 'base.html' %}
 
-{% block title %}OutfitAI - Đang phân tích...{% endblock %}
+{% block title %}OutfitAI - Đang tính toán DSS...{% endblock %}
 
 {% block content %}
 <div class="loading-center-wrapper">
     <div class="ai-sparkle-circle">
-        <span class="star">★</span>
+        ★
     </div>
 
-    <h2>Đang phân tích tủ đồ của bạn...</h2>
-    <p class="loading-subtext">Đang kết hợp thời tiết, lịch học và phong cách cá nhân.</p>
+    <h2 style="font-size: 20px; font-weight: 700;">Hệ DSS đang phân tích tủ đồ...</h2>
+    <p class="loading-subtext" style="font-size: 13px; color: #64748B; margin: 8px 0 20px;">Đang tính điểm ma trận đa tiêu chí dựa trên thời tiết Hà Nội (18°C) và ngữ cảnh Studio kiến trúc.</p>
 
-    <div class="pulse-dots">
-        <span></span><span></span><span></span>
-    </div>
-
-    <div class="model-credit">
-        Powered by AI · Random Forest + KNN
+    <div style="font-size: 12px; color: #7C3AED; font-weight: 600; background: #F3E8FF; padding: 6px 16px; border-radius: 99px;">
+        Đang chạy thuật toán ma trận quyết định DSS...
     </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-    // Tự động chuyển trang sang Kết quả sau 2.5 giây
+    // Tự động chuyển sang trang kết quả sau 2 giây
     setTimeout(function() {
         window.location.href = "{{ url_for('results') }}";
-    }, 2500);
+    }, 2000);
 </script>
 {% endblock %}

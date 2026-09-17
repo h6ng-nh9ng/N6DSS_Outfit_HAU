@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}OutfitAI - Chọn ngữ cảnh {% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="stepper-bar">
+        <span class="step-item active">1 Hoạt động</span>
+        <span class="step-line"></span>
+        <span class="step-item">2 Phong cách</span>
+        <span class="step-line"></span>
+        <span class="step-item">3 Kết quả</span>
+    </div>
+
+    <h1 class="main-title">Hôm nay bạn có hoạt động gì?</h1>
+    <p class="sub-title">Chọn ngữ cảnh để hệ thống DSS gợi ý trang phục phù hợp nhất cho sinh viên kiến trúc.</p>
+
+    <div class="grid-2-cols" style="margin-bottom: 24px;">
+        <div class="activity-card" data-activity="Studio làm đồ án">
+            <div class="activity-icon">📐</div>
+            <h3>Studio làm đồ án</h3>
+            <p>Ngồi vẽ, cắt mô hình, di chuyển nhiều. Cần trang phục thoải mái, co giãn tốt, tối màu tránh bẩn.</p>
+        </div>
+
+        <div class="activity-card" data-activity="Học lý thuyết trên lớp">
+            <div class="activity-icon">📚</div>
+            <h3>Học lý thuyết trên lớp</h3>
+            <p>Ngồi giảng đường máy lạnh hoặc phòng học chung. Phù hợp phong cách Smart Casual thanh lịch.</p>
+        </div>
+
+        <div class="activity-card" data-activity="Thực địa / Làm tại xưởng">
+            <div class="activity-icon">🛠️</div>
+            <h3>Thực địa / Làm tại xưởng</h3>
+            <p>Tiếp xúc gỗ, sơn, vật liệu. Cần đồ bền bỉ, dễ giặt, ưu tiên giày thể thao bảo vệ chân.</p>
+        </div>
+
+        <div class="activity-card" data-activity="Bảo vệ đồ án / Sự kiện">
+            <div class="activity-icon">🏛️</div>
+            <h3>Bảo vệ đồ án / Sự kiện</h3>
+            <p>Thuyết trình trước hội đồng. Cần phong cách chỉn chu, chuyên nghiệp, tạo ấn tượng tốt.</p>
+        </div>
+    </div>
+
+    <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span id="actionHint" style="font-size: 13px; color: #64748B;">Vui lòng chọn 1 hoạt động ở trên để tiếp tục.</span>
+        <button id="btnContinue" class="btn-submit-ai" style="width: auto; padding: 10px 24px;" disabled>Tiếp tục →</button>
+    </div>
+</div>
+{% endblock %}

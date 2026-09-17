@@ -1,125 +1,102 @@
 {% extends 'base.html' %}
 
-{% block title %}OutfitAI - Chi tiết Outfit{% endblock %}
+{% block title %}OutfitAI - Chi tiết & Phân tích DSS{% endblock %}
 
 {% block content %}
 <div class="page-container">
-    <div class="top-breadcrumb">Gợi ý AI › Kết quả Top-3 › <span>Chi tiết Outfit</span></div>
+    <div class="top-breadcrumb">Gợi ý DSS › Kết quả Top 3 › <span>Chi tiết Outfit</span></div>
 
     <div class="detail-split-layout">
-        <!-- CỘT TRÁI -->
+        <!-- CỘT TRÁI: KHỐI TỔNG QUAN -->
         <div class="detail-left">
             <div class="outfit-hero-preview">
-                <span class="badge-top-left">#1 · Phù hợp nhất</span>
-                <span class="badge-top-right">✦ AI</span>
+                <span style="background: white; color: #7C3AED; font-weight: 700; font-size: 10px; padding: 4px 10px; border-radius: 99px; width: fit-content;">#1 Phù hợp nhất</span>
 
                 <div class="overlay-score">
-                    <small>ĐIỂM PHÙ HỢP TỔNG THỂ</small>
+                    <small>ĐIỂM XẾP HẠNG TỔNG HỢP (DSS)</small>
                     <div class="score-large">{{ outfit.match_score }}%</div>
                 </div>
             </div>
 
-            <div class="grid-2-cols meta-boxes">
+            <div class="grid-2-cols">
                 <div class="card mini-meta">
-                    <small>Xếp hạng</small>
-                    <b>#1 / 3</b>
+                    <small>Thứ hạng</small>
+                    <b>Top #{{ outfit.id }}</b>
                 </div>
                 <div class="card mini-meta">
                     <small>Thuật toán</small>
-                    <b>DSS + KNN</b>
+                    <b>DSS Weighting</b>
                 </div>
             </div>
         </div>
 
-        <!-- CỘT PHẢI -->
+        <!-- CỘT PHẢI: CHI TIẾT & TIÊU CHÍ -->
         <div class="detail-right">
-            <div class="card title-box">
-                <span class="ai-badge">✦ AI ĐỀ XUẤT</span>
-                <h2>Thu Đông Nhẹ Nhàng</h2>
-                <p class="subtitle-items">Áo khoác len · Áo sơ mi trắng · Jeans xanh · Boots da chunky</p>
+            <div class="card" style="margin-bottom: 14px;">
+                <span class="purple-pill" style="margin-bottom: 8px; display: inline-block;">✦ ĐỀ XUẤT TỐI ƯU</span>
+                <h2>{{ outfit.name }}</h2>
+                <p style="font-size: 12px; color: #64748B; margin-top: 4px;">{{ outfit.items }}</p>
 
-                <div class="tags-flex">
-                    <span class="tag-gray">18°C - Se lạnh</span>
-                    <span class="tag-gray">Campus</span>
-                    <span class="tag-gray">Casual</span>
-                    <span class="tag-gray">Thu Đông</span>
-                    <span class="tag-gray">Học tập</span>
+                <div style="display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap;">
+                    {% for tag in outfit.tags %}
+                    <span style="background: #F1F5F9; font-size: 10px; padding: 3px 8px; border-radius: 99px; color: #475569;">{{ tag }}</span>
+                    {% endfor %}
                 </div>
             </div>
 
-            <!-- MÔ HÌNH BÀI TẬP LỚN: PHÂN TÍCH TIÊU CHÍ RA QUYẾT ĐỊNH (DSS) -->
+            <!-- PHÂN TÍCH TIÊU CHÍ DSS -->
             <div class="card dss-analysis-card">
                 <div class="dss-header">
-                    <b>✦ Phân tích từ AI</b>
-                    <span class="avg-score">Điểm trung bình: {{ outfit.match_score }}%</span>
+                    <b style="font-size: 13px;">📊 Phân tích ma trận quyết định DSS</b>
+                    <span class="avg-score">Điểm tổng hợp: {{ outfit.match_score }}%</span>
                 </div>
 
                 <div class="dss-criterion">
-                    <div class="crit-row"><span>Thời tiết (18–22°C)</span><b>{{ outfit.temp_score }}%</b></div>
+                    <div class="crit-row"><span>1. Phù hợp thời tiết (Thu Đông 18°C)</span><b>{{ outfit.temp_score }}%</b></div>
                     <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.temp_score }}%;"></div></div>
                 </div>
 
                 <div class="dss-criterion">
-                    <div class="crit-row"><span>Phong cách cá nhân (Khớp hồ sơ style)</span><b>{{ outfit.style_score }}%</b></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.style_score }}%;"></div></div>
+                    <div class="crit-row"><span>2. Phù hợp hoạt động (Studio / Học tập)</span><b>{{ outfit.activity_score }}%</b></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.activity_score }}%;"></div></div>
                 </div>
 
                 <div class="dss-criterion">
-                    <div class="crit-row"><span>Ngữ cảnh học tập (Tối ưu cho campus)</span><b>{{ outfit.activity_score }}%</b></div>
-                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.activity_score }}%;"></div></div>
+                    <div class="crit-row"><span>3. Độ khớp sở thích & Bảng màu cá nhân</span><b>{{ outfit.style_score }}%</b></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.style_score }}%;"></div></div>
                 </div>
             </div>
 
-            <!-- LÝ DO CHỌN -->
+            <!-- LÝ DO HỆ THỐNG ĐỀ XUẤT -->
             <div class="card reasons-card">
-                <b>✓ Vì sao AI đề xuất?</b>
+                <b>✓ Vì sao Hệ trợ giúp ra quyết định chọn bộ này?</b>
                 <ul>
-                    <li>Phù hợp nhiệt độ hiện tại (18–22°C, se lạnh buổi sáng).</li>
-                    <li>Phù hợp với hoạt động học tập trên campus cả ngày.</li>
-                    <li>Phù hợp phong cách cá nhân đã được AI học từ lịch sử chọn đồ.</li>
-                    <li>Màu sắc tương thích với bảng màu yêu thích của bạn.</li>
+                    <li>Giữ ấm vừa phải cho nhiệt độ 18–22°C buổi sáng và chiều tại Hà Nội.</li>
+                    <li>Chất liệu thoải mái, phom dáng rộng rãi thích hợp cho sinh viên làm mô hình/vẽ đồ án.</li>
+                    <li>Màu sắc hài hòa theo bảng màu Tối giản/Navy đã chọn.</li>
                 </ul>
             </div>
 
-            <!-- CÁC MÓN ĐỒ -->
+            <!-- DANH SÁCH MÓN ĐỒ -->
             <div class="card items-breakdown-card">
-                <small class="caption-gray">CÁC MÓN ĐỒ TRONG OUTFIT · <i>Thuật toán KNN</i></small>
+                <span style="font-size: 10px; font-weight: 700; color: #64748B; display: block; margin-bottom: 10px;">CÁC MÓN ĐỒ TRONG OUTFIT</span>
 
-                <div class="grid-4-cols items-grid">
+                <div class="grid-4-cols">
+                    {% for item in outfit.breakdown %}
                     <div class="item-card">
                         <div class="item-img-placeholder"></div>
-                        <small>ÁO KHOÁC</small>
-                        <b>Áo khoác len xám nhạt</b>
+                        <small>{{ item.category }}</small>
+                        <b>{{ item.name }}</b>
                         <button class="btn-swap-item">🔄 Đổi món</button>
                     </div>
-
-                    <div class="item-card">
-                        <div class="item-img-placeholder"></div>
-                        <small>ÁO</small>
-                        <b>Áo sơ mi trắng basic</b>
-                        <button class="btn-swap-item">🔄 Đổi món</button>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-img-placeholder"></div>
-                        <small>QUẦN</small>
-                        <b>Quần jeans xanh slim fit</b>
-                        <button class="btn-swap-item">🔄 Đổi món</button>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-img-placeholder"></div>
-                        <small>GIÀY</small>
-                        <b>Giày boots da nâu chunky</b>
-                        <button class="btn-swap-item">🔄 Đổi món</button>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
             <!-- HÀNH ĐỘNG -->
             <div class="footer-actions-row">
-                <button class="btn-dark-large" onclick="alert('Đã chọn Outfit thành công!')">✓ Chọn outfit này</button>
-                <a href="{{ url_for('results') }}" class="btn-outline-large">‹ Quay lại danh sách</a>
+                <button class="btn-dark-large" onclick="alert('Đã xác nhận chọn Outfit này thành công!')">✓ Chốt mặc outfit này</button>
+                <a href="{{ url_for('results') }}" class="btn-outline-large">‹ Quay lại danh sách Top 3</a>
             </div>
         </div>
     </div>

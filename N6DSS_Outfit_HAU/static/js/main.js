@@ -1,37 +1,38 @@
 document.addEventListener('DOMContentLoaded', function () {
-    // 1. Xử lý chọn Hoạt động (Màn 1)
+    // 1. Xử lý Màn 1: Chọn Hoạt động (index.html)
     const activityCards = document.querySelectorAll('.activity-card');
     const btnContinue = document.getElementById('btnContinue');
     const actionHint = document.getElementById('actionHint');
     let selectedActivity = null;
 
-    activityCards.forEach(card => {
-        card.addEventListener('click', function () {
-            activityCards.forEach(c => c.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedActivity = this.getAttribute('data-activity');
+    if (activityCards.length > 0) {
+        activityCards.forEach(card => {
+            card.addEventListener('click', function () {
+                activityCards.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedActivity = this.getAttribute('data-activity');
 
-            if (btnContinue) {
-                btnContinue.removeAttribute('disabled');
-                btnContinue.classList.add('active');
-            }
+                if (btnContinue) {
+                    btnContinue.removeAttribute('disabled');
+                }
 
-            if (actionHint) {
-                actionHint.textContent = 'Đã chọn hoạt động! Nhấn Tiếp tục để chọn phong cách.';
-                actionHint.style.color = '#7C3AED';
-            }
+                if (actionHint) {
+                    actionHint.textContent = `Đã chọn: "${selectedActivity}". Nhấn tiếp tục để chọn phong cách.`;
+                    actionHint.style.color = '#7C3AED';
+                }
+            });
         });
-    });
+    }
 
     if (btnContinue) {
         btnContinue.addEventListener('click', function () {
             if (selectedActivity) {
-                window.location.href = '/style?activity=' + selectedActivity;
+                window.location.href = '/style?activity=' + encodeURIComponent(selectedActivity);
             }
         });
     }
 
-    // 2. Xử lý chọn Phong cách & Màu sắc (Màn 2)
+    // 2. Xử lý Màn 2: Chọn Phong cách & Màu sắc (style_select.html)
     const chipItems = document.querySelectorAll('.chip-item');
     chipItems.forEach(chip => {
         chip.addEventListener('click', function () {
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // 3. Xử lý Thanh Slider Mức độ thoải mái (Màn 2)
+    // 3. Xử lý Slider Mức độ thoải mái / Lịch sự
     const comfortRange = document.getElementById('comfortRange');
     const rangePercent = document.getElementById('rangePercent');
 

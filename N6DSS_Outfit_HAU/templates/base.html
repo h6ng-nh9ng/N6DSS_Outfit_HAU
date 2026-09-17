@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}OutfitAI - Kiến trúc & Phong cách{% endblock %}</title>
+    <title>{% block title %}OutfitAI - Hệ trợ giúp quyết định trang phục{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="app-container">
@@ -21,9 +21,9 @@
                 </div>
             </div>
 
-            <!-- Card Ngữ cảnh -->
+            <!-- Card Ngữ cảnh Thời tiết & Lịch học -->
             <div class="context-card">
-                <small class="context-title">NGỮ CẢNH HÔM NAY</small>
+                <span class="context-title">NGỮ CẢNH HÔM NAY</span>
                 <div class="context-detail">🌤️ 18°C · Hà Nội</div>
                 <div class="context-detail">📖 Học tập · Thứ Hai</div>
             </div>
@@ -56,9 +56,7 @@
 
         <!-- NỘI DUNG CHÍNH -->
         <main class="main-content">
-            <div class="content-wrapper">
-                {% block content %}{% endblock %}
-            </div>
+            {% block content %}{% endblock %}
         </main>
     </div>
 
