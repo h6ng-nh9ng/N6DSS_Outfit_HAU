@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}OutfitAI - Kiến trúc & Phong cách{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- SIDEBAR BÊN TRÁI -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-box">★</div>
+                <div class="brand-info">
+                    <h2>OutfitAI</h2>
+                    <span>Kiến trúc · Phong cách</span>
+                </div>
+            </div>
+
+            <!-- Card Ngữ cảnh -->
+            <div class="context-card">
+                <small class="context-title">NGỮ CẢNH HÔM NAY</small>
+                <div class="context-detail">🌤️ 18°C · Hà Nội</div>
+                <div class="context-detail">📖 Học tập · Thứ Hai</div>
+            </div>
+
+            <!-- Menu Điều hướng -->
+            <nav class="nav-menu">
+                <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">
+                    <span class="nav-icon">🏠</span> Trang chủ
+                </a>
+                <a href="{{ url_for('style_select') }}" class="nav-link {% if request.endpoint in ['style_select', 'loading', 'results', 'detail'] %}active{% endif %}">
+                    <span class="nav-icon">✨</span> Gợi ý outfit
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">🕒</span> Lịch sử
+                </a>
+                <a href="#" class="nav-link">
+                    <span class="nav-icon">👤</span> Hồ sơ
+                </a>
+            </nav>
+
+            <!-- Profile Người dùng -->
+            <div class="user-profile">
+                <div class="avatar">ML</div>
+                <div class="user-meta">
+                    <div class="user-name">Mai Linh</div>
+                    <div class="user-role">Sinh viên năm 3</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

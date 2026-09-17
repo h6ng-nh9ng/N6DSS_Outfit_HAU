@@ -1,0 +1,264 @@
+/* --- BIẾN MÀU SẮC & KÍCH THƯỚC CHUẨN FIGMA --- */
+:root {
+    --bg-app: #F7F7F5; /* Màu nền toàn trang web từ Figma */
+    --bg-card: #FFFFFF; /* Màu nền Sidebar và Card */
+    --primary-purple: #7C3AED; /* Màu tím chính */
+    --purple-light: #F3E8FF; /* Màu nền Nút/Pill từ Figma */
+    --border-purple: #E9D5FF; /* Màu viền Nút/Pill 1.22px */
+    --border-sidebar: #E5E7EB; /* Màu viền Sidebar 1.44px */
+    --text-dark: #0F172A; /* Màu chữ tối */
+    --text-muted: #64748B; /* Màu chữ xám phụ */
+    --sidebar-width: 220px; /* Chiều rộng Sidebar Fixed(220px) */
+    --radius-card: 16px;
+    --radius-pill: 99px; /* Bán kính bo tròn 99px từ Figma */
+}
+
+/* --- RESET CƠ BẢN --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+/* --- BỐ CỤC CHÍNH (LAYOUT) --- */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- SIDEBAR BÊN TRÁI (Khớp chỉ số Sidebar Figma: Fixed 220px, viền 1.44px #E5E7EB) --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-card);
+    border-right: 1.44px solid var(--border-sidebar);
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    height: 100vh;
+    left: 0;
+    top: 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--purple-light);
+    border: 1.22px solid var(--border-purple);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-purple);
+    font-size: 16px;
+}
+
+.brand-text h2 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.brand-text span {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+/* Card Ngữ Cảnh Trên Sidebar */
+.context-card {
+    background-color: #FAF5FF;
+    border: 1px solid var(--border-purple);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.context-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #9333EA;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.context-item {
+    font-size: 11px;
+    color: #475569;
+    margin-top: 2px;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+    .nav-item.active, .nav-item:hover {
+        background-color: var(--purple-light);
+        color: var(--primary-purple);
+        font-weight: 600;
+    }
+
+/* User Profile Dưới Cùng Sidebar */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid #F1F5F9;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #DDD6FE;
+    color: #5B21B6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.user-name {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.user-role {
+    font-size: 10px;
+    color: var(--text-muted);
+}
+
+/* --- NỘI DUNG CHÍNH (MAIN WRAPPER) --- */
+.main-wrapper {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 28px 36px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.breadcrumb {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+    .breadcrumb span {
+        color: var(--text-dark);
+        font-weight: 600;
+    }
+
+.date-badge {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* --- KHỐI THẺ CARD CHUNG --- */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid #E2E8F0;
+    border-radius: var(--radius-card);
+    padding: 20px;
+}
+
+/* --- NÚT BẤM VÀ PILL (Khớp container Figma: Đệm 4px 10px, Bo 99px, Viền 1.22px #E9D5FF) --- */
+.purple-pill-tag {
+    background-color: var(--purple-light);
+    border: 1.22px solid var(--border-purple);
+    border-radius: var(--radius-pill);
+    padding: 4px 10px; /* Đệm đúng từ Screenshot 225021.png */
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary-purple);
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: #DDD6FE;
+    color: #6D28D9;
+    border: none;
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.2s;
+}
+
+    .btn-primary.active {
+        background-color: var(--primary-purple);
+        color: #FFFFFF;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    }
+
+/* --- LƯỚI BỐ CỤC --- */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+/* Activity Card Hover */
+.activity-card {
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1.5px solid #E2E8F0;
+}
+
+    .activity-card:hover {
+        border-color: #C084FC;
+        transform: translateY(-2px);
+    }
+
+    .activity-card.selected {
+        border-color: var(--primary-purple);
+        background-color: #FAF5FF;
+    }

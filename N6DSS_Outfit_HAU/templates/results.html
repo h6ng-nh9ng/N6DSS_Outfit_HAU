@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}OutfitAI - Outfit phù hợp{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="stepper-bar">
+        <span class="step-item done">✓ Sở thích</span>
+        <span class="step-line active"></span>
+        <span class="step-item done">✓ Hoạt động</span>
+        <span class="step-line active"></span>
+        <span class="step-item done">✓ Thời tiết</span>
+        <span class="step-line active"></span>
+        <span class="step-item active">4 Kết quả</span>
+    </div>
+
+    <div class="results-header">
+        <h1 class="main-title">Outfit phù hợp với bạn</h1>
+        <p class="sub-title">AI đã tìm thấy 3 lựa chọn phù hợp nhất với yêu cầu hôm nay.</p>
+
+        <div class="filter-row">
+            <button class="filter-tab active">Phù hợp nhất</button>
+            <button class="filter-tab">Thoải mái</button>
+            <button class="filter-tab">Phong cách</button>
+            <button class="filter-tab">Thời tiết</button>
+            <span class="live-weather">🟢 Cập nhật theo thời tiết hôm nay · 26°C, có mây</span>
+        </div>
+    </div>
+
+    <!-- CARDS GRID 3 OUTFIT -->
+    <div class="grid-3-cols outfit-results-grid">
+        {% for outfit in outfits %}
+        <div class="card outfit-result-card">
+            <div class="outfit-image-box">
+                <span class="ai-tag">AI ĐỀ XUẤT</span>
+                <span class="number-circle">{{ loop.index }}</span>
+            </div>
+
+            <div class="outfit-details">
+                <h3>{{ outfit.name }}</h3>
+                <p class="items-text">{{ outfit.items }}</p>
+
+                <div class="score-line">
+                    <span class="score-percent">{{ outfit.match_score }}%</span>
+                    <span class="score-label">phù hợp</span>
+                </div>
+
+                <p class="match-desc">{{ outfit.desc }}</p>
+
+                <a href="{{ url_for('detail', outfit_id=outfit.id) }}" class="btn-view-detail">Xem chi tiết ›</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- BANNER DƯỚI -->
+    <div class="card banner-bottom">
+        <div>
+            <b>Muốn thử phong cách khác?</b>
+            <p style="font-size: 12px; color: #64748B;">Điều chỉnh tiêu chí và để AI tạo thêm gợi ý cho bạn.</p>
+        </div>
+        <div class="banner-actions">
+            <a href="{{ url_for('style_select') }}" class="btn-outline-pill">Xem thêm gợi ý</a>
+            <button class="btn-dark-pill" onclick="alert('Đã lưu lựa chọn thành công!')">Lưu lựa chọn →</button>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block title %}OutfitAI - Phong cách của bạn{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="top-breadcrumb">Gợi ý outfit › <span>Tiêu chí phối đồ</span></div>
+
+    <div class="stepper-bar">
+        <span class="step-item done">✓ Yêu cầu</span>
+        <span class="step-line active"></span>
+        <span class="step-item active">2 Phong cách</span>
+        <span class="step-line"></span>
+        <span class="step-item">3 Kết quả</span>
+    </div>
+
+    <form action="{{ url_for('style_select') }}" method="POST" id="styleForm">
+        <div class="form-layout-grid">
+            <!-- CỘT TRÁI -->
+            <div class="form-left">
+                <h1 class="main-title">Phong cách của bạn</h1>
+                <p class="sub-title">Cho chúng tôi biết thêm về gu thẩm mỹ của bạn để AI gợi ý outfit phù hợp nhất.</p>
+
+                <!-- 1. Phong cách -->
+                <div class="card form-card">
+                    <h4>Phong cách yêu thích</h4>
+                    <p class="card-subtext">Chọn một hoặc nhiều phong cách phù hợp với bạn</p>
+                    <div class="chip-group">
+                        <label class="chip-item selected"><input type="checkbox" name="styles" value="Tối giản" checked hidden> Tối giản</label>
+                        <label class="chip-item"><input type="checkbox" name="styles" value="Năng động" hidden> Năng động</label>
+                        <label class="chip-item"><input type="checkbox" name="styles" value="Layer" hidden> Layer</label>
+                        <label class="chip-item"><input type="checkbox" name="styles" value="Casual" hidden> Casual</label>
+                        <label class="chip-item"><input type="checkbox" name="styles" value="Streetwear" hidden> Streetwear</label>
+                        <label class="chip-item"><input type="checkbox" name="styles" value="Smart Casual" hidden> Smart Casual</label>
+                    </div>
+                </div>
+
+                <!-- 2. Màu sắc -->
+                <div class="card form-card">
+                    <h4>Màu sắc ưu tiên</h4>
+                    <p class="card-subtext">Chọn các tông màu bạn thường ưa dùng</p>
+                    <div class="color-picker-group">
+                        <label class="color-dot selected" style="background:#0F172A;" title="Đen"><input type="checkbox" name="colors" value="Đen" checked hidden>✓</label>
+                        <label class="color-dot" style="background:#FFFFFF; border:1px solid #CBD5E1;" title="Trắng"><input type="checkbox" name="colors" value="Trắng" hidden></label>
+                        <label class="color-dot" style="background:#64748B;" title="Xám"><input type="checkbox" name="colors" value="Xám" hidden></label>
+                        <label class="color-dot" style="background:#D97706;" title="Be"><input type="checkbox" name="colors" value="Be" hidden></label>
+                        <label class="color-dot" style="background:#78350F;" title="Nâu đất"><input type="checkbox" name="colors" value="Nâu đất" hidden></label>
+                        <label class="color-dot selected" style="background:#1E1B4B;" title="Navy"><input type="checkbox" name="colors" value="Navy" checked hidden>✓</label>
+                        <label class="color-dot" style="background:#3F6212;" title="Olive"><input type="checkbox" name="colors" value="Olive" hidden></label>
+                        <label class="color-dot" style="background:#FEF3C7;" title="Kem"><input type="checkbox" name="colors" value="Kem" hidden></label>
+                        <label class="color-dot" style="background:#C2410C;" title="Terracotta"><input type="checkbox" name="colors" value="Terracotta" hidden></label>
+                        <label class="color-dot" style="background:#334155;" title="Xanh khói"><input type="checkbox" name="colors" value="Xanh khói" hidden></label>
+                    </div>
+                </div>
+
+                <!-- 3. Mức độ thoải mái -->
+                <div class="card form-card">
+                    <h4>Mức độ thoải mái</h4>
+                    <p class="card-subtext">Điều chỉnh mức độ phù hợp giữa thoải mái và trang trọng</p>
+                    <div class="range-container">
+                        <input type="range" name="formality" min="0" max="100" value="35" class="purple-slider" id="comfortRange">
+                        <div class="range-labels">
+                            <div><b>Thoải mái</b><br><small>Casual, dễ chịu</small></div>
+                            <div class="center-val"><b id="rangePercent">35%</b><br><small>CÂN BẰNG</small></div>
+                            <div class="text-right"><b>Trang trọng</b><br><small>Lịch sự, formal</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Yêu cầu khác -->
+                <div class="card form-card">
+                    <h4>Yêu cầu khác</h4>
+                    <p class="card-subtext">Thêm lưu ý đặc biệt để AI hiểu rõ hơn về nhu cầu của bạn</p>
+                    <textarea name="notes" class="custom-textarea" placeholder="Ví dụ: Không mặc áo sáng màu khi làm xưởng..."></textarea>
+                    <div class="char-count">0 / 200</div>
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI (TỔNG HỢP) -->
+            <div class="form-right">
+                <div class="card preview-card">
+                    <div class="preview-box-placeholder">
+                        <span>🟢 Preview phong cách</span>
+                    </div>
+
+                    <h3>LỰA CHỌN CỦA BẠN</h3>
+                    <div class="summary-row">
+                        <span>Phong cách</span>
+                        <span class="purple-pill">Tối giản</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Màu sắc</span>
+                        <div class="dots-inline"><span class="d-black"></span><span class="d-navy"></span></div>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phong độ</span>
+                        <b>Cân bằng (35%)</b>
+                    </div>
+
+                    <div class="ai-info-box">
+                        ✨ AI sẽ gợi ý outfit phù hợp với môi trường studio kiến trúc, ưu tiên sự linh hoạt và thẩm mỹ.
+                    </div>
+
+                    <button type="submit" class="btn-submit-ai">✨ Bắt đầu phân tích AI</button>
+                    <a href="{{ url_for('index') }}" class="btn-back-link">‹ Quay lại bước trước</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

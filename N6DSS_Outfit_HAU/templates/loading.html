@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}OutfitAI - Đang phân tích...{% endblock %}
+
+{% block content %}
+<div class="loading-center-wrapper">
+    <div class="ai-sparkle-circle">
+        <span class="star">★</span>
+    </div>
+
+    <h2>Đang phân tích tủ đồ của bạn...</h2>
+    <p class="loading-subtext">Đang kết hợp thời tiết, lịch học và phong cách cá nhân.</p>
+
+    <div class="pulse-dots">
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="model-credit">
+        Powered by AI · Random Forest + KNN
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Tự động chuyển trang sang Kết quả sau 2.5 giây
+    setTimeout(function() {
+        window.location.href = "{{ url_for('results') }}";
+    }, 2500);
+</script>
+{% endblock %}

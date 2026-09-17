@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block title %}OutfitAI - Chi tiết Outfit{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="top-breadcrumb">Gợi ý AI › Kết quả Top-3 › <span>Chi tiết Outfit</span></div>
+
+    <div class="detail-split-layout">
+        <!-- CỘT TRÁI -->
+        <div class="detail-left">
+            <div class="outfit-hero-preview">
+                <span class="badge-top-left">#1 · Phù hợp nhất</span>
+                <span class="badge-top-right">✦ AI</span>
+
+                <div class="overlay-score">
+                    <small>ĐIỂM PHÙ HỢP TỔNG THỂ</small>
+                    <div class="score-large">{{ outfit.match_score }}%</div>
+                </div>
+            </div>
+
+            <div class="grid-2-cols meta-boxes">
+                <div class="card mini-meta">
+                    <small>Xếp hạng</small>
+                    <b>#1 / 3</b>
+                </div>
+                <div class="card mini-meta">
+                    <small>Thuật toán</small>
+                    <b>DSS + KNN</b>
+                </div>
+            </div>
+        </div>
+
+        <!-- CỘT PHẢI -->
+        <div class="detail-right">
+            <div class="card title-box">
+                <span class="ai-badge">✦ AI ĐỀ XUẤT</span>
+                <h2>Thu Đông Nhẹ Nhàng</h2>
+                <p class="subtitle-items">Áo khoác len · Áo sơ mi trắng · Jeans xanh · Boots da chunky</p>
+
+                <div class="tags-flex">
+                    <span class="tag-gray">18°C - Se lạnh</span>
+                    <span class="tag-gray">Campus</span>
+                    <span class="tag-gray">Casual</span>
+                    <span class="tag-gray">Thu Đông</span>
+                    <span class="tag-gray">Học tập</span>
+                </div>
+            </div>
+
+            <!-- MÔ HÌNH BÀI TẬP LỚN: PHÂN TÍCH TIÊU CHÍ RA QUYẾT ĐỊNH (DSS) -->
+            <div class="card dss-analysis-card">
+                <div class="dss-header">
+                    <b>✦ Phân tích từ AI</b>
+                    <span class="avg-score">Điểm trung bình: {{ outfit.match_score }}%</span>
+                </div>
+
+                <div class="dss-criterion">
+                    <div class="crit-row"><span>Thời tiết (18–22°C)</span><b>{{ outfit.temp_score }}%</b></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.temp_score }}%;"></div></div>
+                </div>
+
+                <div class="dss-criterion">
+                    <div class="crit-row"><span>Phong cách cá nhân (Khớp hồ sơ style)</span><b>{{ outfit.style_score }}%</b></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.style_score }}%;"></div></div>
+                </div>
+
+                <div class="dss-criterion">
+                    <div class="crit-row"><span>Ngữ cảnh học tập (Tối ưu cho campus)</span><b>{{ outfit.activity_score }}%</b></div>
+                    <div class="bar-bg"><div class="bar-fill" style="width: {{ outfit.activity_score }}%;"></div></div>
+                </div>
+            </div>
+
+            <!-- LÝ DO CHỌN -->
+            <div class="card reasons-card">
+                <b>✓ Vì sao AI đề xuất?</b>
+                <ul>
+                    <li>Phù hợp nhiệt độ hiện tại (18–22°C, se lạnh buổi sáng).</li>
+                    <li>Phù hợp với hoạt động học tập trên campus cả ngày.</li>
+                    <li>Phù hợp phong cách cá nhân đã được AI học từ lịch sử chọn đồ.</li>
+                    <li>Màu sắc tương thích với bảng màu yêu thích của bạn.</li>
+                </ul>
+            </div>
+
+            <!-- CÁC MÓN ĐỒ -->
+            <div class="card items-breakdown-card">
+                <small class="caption-gray">CÁC MÓN ĐỒ TRONG OUTFIT · <i>Thuật toán KNN</i></small>
+
+                <div class="grid-4-cols items-grid">
+                    <div class="item-card">
+                        <div class="item-img-placeholder"></div>
+                        <small>ÁO KHOÁC</small>
+                        <b>Áo khoác len xám nhạt</b>
+                        <button class="btn-swap-item">🔄 Đổi món</button>
+                    </div>
+
+                    <div class="item-card">
+                        <div class="item-img-placeholder"></div>
+                        <small>ÁO</small>
+                        <b>Áo sơ mi trắng basic</b>
+                        <button class="btn-swap-item">🔄 Đổi món</button>
+                    </div>
+
+                    <div class="item-card">
+                        <div class="item-img-placeholder"></div>
+                        <small>QUẦN</small>
+                        <b>Quần jeans xanh slim fit</b>
+                        <button class="btn-swap-item">🔄 Đổi món</button>
+                    </div>
+
+                    <div class="item-card">
+                        <div class="item-img-placeholder"></div>
+                        <small>GIÀY</small>
+                        <b>Giày boots da nâu chunky</b>
+                        <button class="btn-swap-item">🔄 Đổi món</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HÀNH ĐỘNG -->
+            <div class="footer-actions-row">
+                <button class="btn-dark-large" onclick="alert('Đã chọn Outfit thành công!')">✓ Chọn outfit này</button>
+                <a href="{{ url_for('results') }}" class="btn-outline-large">‹ Quay lại danh sách</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
